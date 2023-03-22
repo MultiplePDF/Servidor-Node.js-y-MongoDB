@@ -37,3 +37,37 @@ export const createLote = async (req, res) => {
     console.log(error);
   }
 };
+
+export const uploadLotes = async (req, res) => {
+  const { idUsuario } = req.body;
+  try {
+    const lotes = await Lote.find({ idUsuario: idUsuario });
+
+    if (!lotes) {
+      return res
+        .status(404)
+        .json({ message: "No existe lotes para este usuario" });
+    }
+
+    return res.status(200).json(lotes);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const uploadfiles = async (req, res) => {
+  const { idUsuario } = req.body;
+  try {
+    const lotes = await Lote.find({ idUsuario: idUsuario });
+
+    if (!lotes) {
+      return res
+        .status(404)
+        .json({ message: "No existe archivos para este usuario" });
+    }
+
+    return res.status(200).json(lotes[0].archivos);
+  } catch (error) {
+    console.log(error);
+  }
+};

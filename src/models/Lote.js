@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import Archivo from "./Archivo";
 
 const loteSchema = new Schema(
   {
@@ -6,7 +7,7 @@ const loteSchema = new Schema(
     numeroArchivos: Number,
     rutaCarpeta: String,
     rutaLote: String,
-    archivos: Object, //id archivos
+    archivos: [{ type: Object, ref: Archivo }], //archivos
     vigencia: Date,
     estado: Boolean, //la accion true significa lote vigente, false significa lote caducado
   },
