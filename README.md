@@ -21,4 +21,4 @@ Para correr el servicio de Node.js necesitas instalar las dependencias:
 
 `npm install @babel/core @babel/cli @babel/node @babel/preset-env nodemon -D`
 
-Despues de haber instalado todo, ejecuta el siguiente comando dentro de la misma carpeta PT-HOTEL `npm run dev`
+Despues de haber instalado todo, ejecuta el siguiente comando `npm run dev`
