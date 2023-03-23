@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "852e55b9-5c8a-4e62-b1a6-145bfddb0069",
+		"name": "Api rest Mongo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26378506"
+	},
+	"item": [
+		{
+			"name": "/lote/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":2,\r\n    \"numeroArchivos\":1,\r\n    \"rutaLote\": \"C:\\\\Users\\\\CAMILO\\\\Documents\\\\GitHub\",\r\n    \"archivos\":[{\r\n        \"nombreArchivo\":\"arepa\",\r\n        \"tamanno\":15.21,\r\n        \"rutaArchivo\":\"ruta\"\r\n    }],\r\n    \"vigencia\":\"2023-03-15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/lote/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lote",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/lote/uploadLotes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/lote/uploadLotes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lote",
+						"uploadLotes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/lote/uploadFiles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/lote/uploadFiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lote",
+						"uploadFiles"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
