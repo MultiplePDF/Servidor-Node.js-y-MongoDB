@@ -4,9 +4,9 @@ import Archivo from "../models/Archivo";
 export const getLotes = async (req, res) => {
   const { idUsuario } = req.body;
   try {
-    const lotes = await Lote.find({ idUsuario: idUsuario });
+    const lotes = await Lote.find({ idUsuario });
 
-    if (!lotes) {
+    if (lotes.length == 0) {
       return res
         .status(404)
         .json({ message: "No existe una carpeta asignada para ese usuario" });
@@ -19,11 +19,12 @@ export const getLotes = async (req, res) => {
 };
 
 export const createLote = async (req, res) => {
-  const { idUsuario, numeroArchivos, rutaLote, archivos, vigencia } = req.body;
+  const { idUsuario, numeroArchivos, rutaCarpeta, rutaLote, archivos, vigencia } = req.body;
   try {
     const newLote = new Lote({
       idUsuario,
       numeroArchivos,
+      rutaCarpeta,
       rutaLote,
       archivos,
       vigencia,
@@ -75,7 +76,8 @@ export const uploadfiles = async (req, res) => {
 export const downloadLote = async (req, res) => {
   const { idLote } = req.body;
   try {
-    const lotes = await Lote.findById({ idLote });
+    const lotes = await Lote.findById(idLote);
+    console.log(lotes)
 
     if (lotes.length == 0) {
       return res
@@ -83,7 +85,27 @@ export const downloadLote = async (req, res) => {
         .json({ message: "No existe ese lote para este usuario" });
     }
 
-    return res.status(200).json(lotes[0].rutaLote);
+    return res.status(200).json(lotes.rutaLote);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const downloadFile = async (req, res) => {
+  const { idLote, fileIdx } = req.body;
+  try {
+    const lote = await Lote.findById(idLote);
+    console.log(lote)
+
+    if (!lote) {
+      return res
+        .status(404)
+        .json({ message: "No existe ese lote para este usuario" });
+    }
+
+    const file = lote.archivos[fileIdx];//el cliente debe mandar el indice con -1
+
+    return res.status(200).json(file.rutaArchivo);
   } catch (error) {
     console.log(error);
   }
