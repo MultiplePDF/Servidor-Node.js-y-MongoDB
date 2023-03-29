@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KillTheReptiles/pt-hotel.git"
+    "url": "https://github.com/MultiplePDF/Servidor-Node.js-y-MongoDB"
   },
   "keywords": [],
-  "author": "Duvan Diaz",
+  "author": "Wilson Escobar, Mario Hurtado, Henry Nuñez",
   "license": "",
   "bugs": {
-    "url": "https://github.com/KillTheReptiles/pt-hotel/issues"
+    "url": "https://github.com/MultiplePDF/Servidor-Node.js-y-MongoDB"
   },
-  "homepage": "https://github.com/KillTheReptiles/pt-hotel#readme",
+  "homepage": "https://github.com/MultiplePDF",
   "devDependencies": {
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.3",
