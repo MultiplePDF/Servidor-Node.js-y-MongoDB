@@ -9,5 +9,6 @@ router.post("/uploadLotes", loteController.uploadLotes);
 router.post("/uploadFiles", loteController.uploadfiles);
 router.post("/downloadLote", loteController.downloadLote);
 router.post("/downloadFile", loteController.downloadFile);
+router.post("/changeEstado", loteController.changeEstado);
 
 export default router;

@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "852e55b9-5c8a-4e62-b1a6-145bfddb0069",
-		"name": "Api rest Mongo",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26378506"
+		"_postman_id": "6848c940-53a2-4c60-bef3-cce7b8227e53",
+		"name": "Api rest Mongo Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -13,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idUsuario\":2,\r\n    \"numeroArchivos\":1,\r\n    \"rutaLote\": \"C:\\\\Users\\\\CAMILO\\\\Documents\\\\GitHub\",\r\n    \"archivos\":[{\r\n        \"nombreArchivo\":\"arepa\",\r\n        \"tamanno\":15.21,\r\n        \"rutaArchivo\":\"ruta\"\r\n    }],\r\n    \"vigencia\":\"2023-03-15\"\r\n}",
+					"raw": "{\r\n    \"idUsuario\":2,\r\n    \"numeroArchivos\":1,\r\n    \"rutaCarpeta\":\"D:\\\\Users\\\\CAMILO\\\\Documents\\\\GitHub\"\r\n    \"rutaLote\": \"C:\\\\Users\\\\CAMILO\\\\Documents\\\\GitHub\",\r\n    \"archivos\":[{\r\n        \"nombreArchivo\":\"arepa\",\r\n        \"tamanno\":15.21,\r\n        \"rutaArchivo\":\"ruta\"\r\n    }],\r\n    \"vigencia\":\"2023-03-15\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,6 +89,51 @@
 						"uploadFiles"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "/lote/downloadFile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idLote\": \"642315c92bc43137c08a313b\",\r\n    \"fileIdx\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/lote/downloadFile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lote",
+						"downloadFile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/lote/downloadLote",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "/lote/getLotes",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}

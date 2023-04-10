@@ -19,7 +19,14 @@ export const getLotes = async (req, res) => {
 };
 
 export const createLote = async (req, res) => {
-  const { idUsuario, numeroArchivos, rutaCarpeta, rutaLote, archivos, vigencia } = req.body;
+  const {
+    idUsuario,
+    numeroArchivos,
+    rutaCarpeta,
+    rutaLote,
+    archivos,
+    vigencia,
+  } = req.body;
   try {
     const newLote = new Lote({
       idUsuario,
@@ -57,15 +64,15 @@ export const uploadLotes = async (req, res) => {
 };
 
 export const uploadfiles = async (req, res) => {
-  const { idUsuario } = req.body;
+  const { idLote } = req.body;
   try {
-    const lotes = await Lote.find({ idUsuario });
+    const lotes = await Lote.find({ idLote });
 
-    if (lotes.length == 0) {
+    /*if (lotes.length == 0) {
       return res
         .status(404)
         .json({ message: "No existe archivos para este usuario" });
-    }
+    }*/
 
     return res.status(200).json(lotes[0].archivos);
   } catch (error) {
@@ -78,14 +85,14 @@ export const downloadLote = async (req, res) => {
   const { idLote } = req.body;
   try {
     const lotes = await Lote.findById(idLote);
-    let numaccion=1;
+    let numaccion = 1;
 
     /*if (lotes.length == 0) {
       return res
         .status(404)
         .json({ message: "No existe ese lote para este usuario" });
     }*/
-    createTransaccion(idLote,numaccion);
+    createTransaccion(idLote, numaccion);
     return res.status(200).json(lotes.rutaLote);
   } catch (error) {
     console.log(error);
@@ -96,17 +103,17 @@ export const downloadFile = async (req, res) => {
   const { idLote, fileIdx } = req.body;
   try {
     const lote = await Lote.findById(idLote);
-    let newaccion=0;
-    
+    let newaccion = 0;
+
     /*if (!lote) {
       return res
         .status(404)
         .json({ message: "No existe ese lote para este usuario" });
     }*/
 
-    createTransaccion(idLote,newaccion);
+    createTransaccion(idLote, newaccion);
 
-    const file = lote.archivos[fileIdx];//el cliente debe mandar el indice con -1
+    const file = lote.archivos[fileIdx]; //el cliente debe mandar el indice con -1
 
     return res.status(200).json(file.rutaArchivo);
   } catch (error) {
@@ -114,7 +121,7 @@ export const downloadFile = async (req, res) => {
   }
 };
 
- async function createTransaccion(idLote, accion)  {
+async function createTransaccion(idLote, accion) {
   try {
     const newTransaccion = new Transaccion({
       idLote,
@@ -122,9 +129,38 @@ export const downloadFile = async (req, res) => {
     });
 
     const transaccionSaved = await newTransaccion.save();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+/*export async function changeEstado(idLote, estado) {
+  try {
+    let newaccion2 = -1;
+    const lote = await Lote.findById(idLote);
+
+    if (estado) {
+      lote.estado = false;
+      createTransaccion(idLote, newaccion2);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}*/
+
+export const changeEstado = async (req, res) => {
+  const { idLote, estado } = req.body;
+  try {
+    let newaccion2 = -1;
+    const lote = await Lote.findById(idLote);
+
+    if (estado == true) {
+      lote.estado = false;
+      await lote.save();
+      createTransaccion(idLote, newaccion2);
+    }
+    return res.status(200).json(idLote);
   } catch (error) {
     console.log(error);
   }
 };
-
