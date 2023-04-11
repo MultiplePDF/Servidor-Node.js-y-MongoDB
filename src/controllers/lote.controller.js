@@ -66,7 +66,7 @@ export const uploadLotes = async (req, res) => {
 export const uploadfiles = async (req, res) => {
   const { idLote } = req.body;
   try {
-    const lotes = await Lote.find({ idLote });
+    const lotes = await Lote.findById(idLote);
 
     /*if (lotes.length == 0) {
       return res
@@ -74,7 +74,7 @@ export const uploadfiles = async (req, res) => {
         .json({ message: "No existe archivos para este usuario" });
     }*/
 
-    return res.status(200).json(lotes[0].archivos);
+    return res.status(200).json(lotes.archivos);
   } catch (error) {
     console.log(error);
   }
