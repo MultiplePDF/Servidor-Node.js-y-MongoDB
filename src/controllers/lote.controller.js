@@ -1,7 +1,7 @@
 import Lote from "../models/Lote";
 import Transaccion from "../models/Transaccion";
 
-export const getLotes = async (req, res) => {
+export const loteExist = async (req, res) => {
   const { idUsuario } = req.body;
   try {
     const lotes = await Lote.find({ idUsuario });
@@ -15,6 +15,9 @@ export const getLotes = async (req, res) => {
     return res.status(200).json(lotes[0].rutaCarpeta);
   } catch (error) {
     console.log(error);
+    return res
+        .status(404)
+        .json({ message: "No existe una carpeta asignada para ese usuario" });
   }
 };
 
@@ -28,6 +31,7 @@ export const createLote = async (req, res) => {
     vigencia,
   } = req.body;
   try {
+    let numaccion2 = 2;
     const newLote = new Lote({
       idUsuario,
       numeroArchivos,
@@ -38,11 +42,13 @@ export const createLote = async (req, res) => {
       estado: true,
     });
 
-    const loteSaved = await newLote.save();
+    await newLote.save();
+    createTransaccion(newLote._id, numaccion2);
 
-    res.status(201).json(loteSaved);
+    res.status(201).json({ message: "El lote fue creado con exito" });
   } catch (error) {
     console.log(error);
+    res.status(404).json({ message: "El lote no fue creado con exito" });
   }
 };
 
@@ -60,6 +66,9 @@ export const uploadLotes = async (req, res) => {
     return res.status(200).json(lotes);
   } catch (error) {
     console.log(error);
+    return res
+        .status(404)
+        .json({ message: "Se presento un error al buscar lotes" });
   }
 };
 
@@ -68,15 +77,12 @@ export const uploadfiles = async (req, res) => {
   try {
     const lotes = await Lote.findById(idLote);
 
-    /*if (lotes.length == 0) {
-      return res
-        .status(404)
-        .json({ message: "No existe archivos para este usuario" });
-    }*/
-
     return res.status(200).json(lotes.archivos);
   } catch (error) {
     console.log(error);
+    return res
+    .status(404)
+    .json({ message: "Se presento un error al buscar archivos" });
   }
 };
 
@@ -87,15 +93,13 @@ export const downloadLote = async (req, res) => {
     const lotes = await Lote.findById(idLote);
     let numaccion = 1;
 
-    /*if (lotes.length == 0) {
-      return res
-        .status(404)
-        .json({ message: "No existe ese lote para este usuario" });
-    }*/
     createTransaccion(idLote, numaccion);
     return res.status(200).json(lotes.rutaLote);
   } catch (error) {
     console.log(error);
+    return res
+        .status(404)
+        .json(null);
   }
 };
 
@@ -105,12 +109,6 @@ export const downloadFile = async (req, res) => {
     const lote = await Lote.findById(idLote);
     let newaccion = 0;
 
-    /*if (!lote) {
-      return res
-        .status(404)
-        .json({ message: "No existe ese lote para este usuario" });
-    }*/
-
     createTransaccion(idLote, newaccion);
 
     const file = lote.archivos[fileIdx]; //el cliente debe mandar el indice con -1
@@ -118,6 +116,9 @@ export const downloadFile = async (req, res) => {
     return res.status(200).json(file.rutaArchivo);
   } catch (error) {
     console.log(error);
+    return res
+    .status(404)
+    .json(null);
   }
 };
 
@@ -128,27 +129,28 @@ async function createTransaccion(idLote, accion) {
       accion,
     });
 
-    const transaccionSaved = await newTransaccion.save();
+    await newTransaccion.save();
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-/*export async function changeEstado(idLote, estado) {
+export async function changeEstado(idLote, estado) {
   try {
     let newaccion2 = -1;
     const lote = await Lote.findById(idLote);
 
-    if (estado) {
+    if (estado == true) {
       lote.estado = false;
+      await lote.save();
       createTransaccion(idLote, newaccion2);
     }
   } catch (error) {
     console.log(error);
   }
-}*/
+};
 
-export const changeEstado = async (req, res) => {
+/*export const changeEstado = async (req, res) => {
   const { idLote, estado } = req.body;
   try {
     let newaccion2 = -1;
@@ -163,4 +165,4 @@ export const changeEstado = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-};
+};*/
