@@ -144,9 +144,11 @@ export async function changeEstado(idLote, estado) {
       lote.estado = false;
       await lote.save();
       createTransaccion(idLote, newaccion2);
+      return true;
     }
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
