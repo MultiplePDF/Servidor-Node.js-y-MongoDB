@@ -152,6 +152,22 @@ export async function changeEstado(idLote, estado) {
   }
 };
 
+async function auditoria(){
+  try {
+    const fecha= new Date("2023-04-18T16:19:23.024+00:00");
+    //const rangoFechas= {$gte:fecha1,$lt:fecha2}
+    const transaccionN = await Transaccion.find({createdAt:fecha});
+
+    console.log(transaccionN)
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const test = async (req, res) => {
+  auditoria()
+}
 /*export const changeEstado = async (req, res) => {
   const { idLote, estado } = req.body;
   try {

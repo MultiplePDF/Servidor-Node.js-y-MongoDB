@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 // Welcome Routes
 app.get("/", (req, res) => {
   res.json({
-    message: "Prueba Técnina - Hotel",
+    message: "Server-DataBase",
     name: app.get("pkg").name,
     version: app.get("pkg").version,
     description: app.get("pkg").description,
