@@ -153,10 +153,25 @@ export async function changeEstado(idLote, estado) {
 };
 
 async function auditoria(){
-  try {
-    const fecha= new Date("2023-04-18T16:19:23.024+00:00");
-    //const rangoFechas= {$gte:fecha1,$lt:fecha2}
-    const transaccionN = await Transaccion.find({createdAt:fecha});
+  try { 
+    let hour=23,minutes=59,seconds=59;
+
+    const fecha1=new Date();
+    fecha1.setDate(fecha1.getDate()-2);
+    fecha1.setHours(hour);
+    fecha1.setMinutes(minutes);
+    fecha1.setSeconds(seconds);
+    const fecha2=new Date();
+    fecha2.setDate(fecha2.getDate()-1);
+    fecha2.setHours(hour);
+    fecha2.setMinutes(minutes);
+    fecha2.setSeconds(seconds);
+    const rangoFechas= {$gte:fecha1,$lt:fecha2}
+
+    console.log(fecha1);
+    console.log(fecha2);
+
+    const transaccionN = await Transaccion.find({createdAt:rangoFechas});
 
     console.log(transaccionN)
 
