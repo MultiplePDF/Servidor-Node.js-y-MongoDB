@@ -4,7 +4,7 @@ import helmet from "helmet";
 
 import pkg from "../package.json";
 
-import loteRoutes from "./routes/lote.routes";
+import loteRoutes from "./routes/Batch.routes";
 
 const app = express();
 
@@ -31,6 +31,6 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/lote", loteRoutes);
+app.use("/batch", loteRoutes);
 
 export default app;
