@@ -2,10 +2,7 @@ import Batch from "../models/Batch";
 import Transaction from "../models/Transaction";
 const cron = require('node-cron');
 var fs = require('fs');
-
-
 import {contentSecurityPolicy} from "helmet";
-
 cron.schedule('59 59 23 * * *', audit);
 
 
@@ -150,8 +147,7 @@ async function createTransaction(batchId, action) {
 
 export const changeState = async (req, res) => {
   try{  let { batchId, status } = req.body;
-    //console.log(batchId)
-    //console.log(status)
+
     let newACtion=-1
 
     const batch = await Batch.findById(batchId);
@@ -181,31 +177,6 @@ export const changeState = async (req, res) => {
 
 };
 
-
-//export async function changeState2(batchID, estado) {
-  //try {
-
-
-    //console.log(batchID)
-    //console.log(estado)
-
-    //let newaccion2 = -1
-
-
-    //const batch = await Batch.findById(batchID);
-
-    //if (estado == true) {
-      //batch.status = false
-      //await batch.save()
-      //createTransaccion(batchID, newaccion2);
-      //return true;
-    //}
-  //} catch (error) {
-    //console.log("error");
-    //return false;
-  //}
-//}
-
 async function audit(){
   try {
     let hour=23,minutes=59,seconds=59;
@@ -227,12 +198,6 @@ async function audit(){
 
     const transactionN = await Transaction.find({createdAt:dateRange});
 
-    //console.log(transactionN)
-    //console.log(transactionN[0])
-
-
-
-
     var name=  new Date().toString()+".json"
 
     const data = JSON.stringify(transactionN)
@@ -252,27 +217,11 @@ async function audit(){
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const test = async (req, res) => {
   audit()
   return res
       .status(200)
       .json({ message: "Se realizo la auditoria" });
-}
-/*export const changeEstado = async (req, res) => {
-  const { idLote, estado } = req.body;
-  try {
-    let newaccion2 = -1;
-    const lote = await Lote.findById(idLote);
-
-    if (estado == true) {
-      lote.estado = false;
-      await lote.save();
-      createTransaccion(idLote, newaccion2);
-    }
-    return res.status(200).json(idLote);
-  } catch (error) {
-    console.log(error);
-  }
-};*/
+};
