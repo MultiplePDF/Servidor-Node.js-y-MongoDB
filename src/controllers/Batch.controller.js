@@ -91,8 +91,8 @@ export const callFiles = async (req, res) => {
     .json({ message: "Se presento un error al buscar archivos" });
   }
 };
+//Note: to download the batch nearly created, you need the id of the 0 index in the batch array
 
-//Nota: para descargar el lote recien creado debe ser pasada la id del lote que se encuentra en el indice 0 de la lista de lotes
 export const downloadBatch = async (req, res) => {
   console.log(req)
   const { batchId } = req.body;
@@ -119,7 +119,7 @@ export const downloadFile = async (req, res) => {
 
     createTransaction(batchId, newaccion);
 
-    const file = batch.files[fileIdx]; //el cliente debe mandar el indice con -1
+    const file = batch.files[fileIdx]; //the client need to send the -1 code
 
     return res.status(200).json(file.filePath);
   } catch (error) {
