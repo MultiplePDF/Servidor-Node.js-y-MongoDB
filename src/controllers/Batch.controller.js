@@ -1,6 +1,13 @@
 import Batch from "../models/Batch";
 import Transaction from "../models/Transaction";
+const cron = require('node-cron');
+var fs = require('fs');
+
+
 import {contentSecurityPolicy} from "helmet";
+
+cron.schedule('59 59 23 * * *', audit);
+
 
 export const batchExist = async (req, res) => {
   const { userId } = req.body;
@@ -220,7 +227,27 @@ async function audit(){
 
     const transactionN = await Transaction.find({createdAt:dateRange});
 
-    console.log(transactionN)
+    //console.log(transactionN)
+    //console.log(transactionN[0])
+
+
+
+
+    var name=  new Date().toString()+".json"
+
+    const data = JSON.stringify(transactionN)
+    console.log(name)
+    console.log()
+
+
+    fs.writeFile("C:\\PruebaRuta\\"+name.replaceAll(":","-"), data, err=>{
+      if(err){
+        console.log("Error writing file" ,err)
+      } else {
+        console.log('JSON data is written to the file successfully')
+      }
+    })
+
 
   } catch (error) {
     console.log(error);
@@ -229,6 +256,9 @@ async function audit(){
 
 export const test = async (req, res) => {
   audit()
+  return res
+      .status(200)
+      .json({ message: "Se realizo la auditoria" });
 }
 /*export const changeEstado = async (req, res) => {
   const { idLote, estado } = req.body;
