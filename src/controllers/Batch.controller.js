@@ -44,7 +44,7 @@ export const createBatch = async (req, res) => {
     });
 
     await newBatch.save();
-    createTransaccion(newBatch._id, numaccion2);
+    createTransaction(newBatch._id, numaccion2);
 
     res.status(201).json({ message: "El lote fue creado con exito" });
   } catch (error) {
@@ -97,7 +97,7 @@ export const downloadBatch = async (req, res) => {
     const batches = await Batch.findById(batchId);
     let numAction = 1;
 
-    createTransaccion(batchId, numAction);
+    createTransaction(batchId, numAction);
     return res.status(200).json(batches.batchPath);
   } catch (error) {
     console.log(error);
@@ -113,7 +113,7 @@ export const downloadFile = async (req, res) => {
     const batch = await Batch.findById(batchId);
     let newaccion = 0;
 
-    createTransaccion(batchId, newaccion);
+    createTransaction(batchId, newaccion);
 
     const file = batch.files[fileIdx]; //el cliente debe mandar el indice con -1
 
@@ -126,7 +126,7 @@ export const downloadFile = async (req, res) => {
   }
 };
 
-async function createTransaccion(batchId, action) {
+async function createTransaction(batchId, action) {
   console.log(batchId)
   console.log(action)
   try {
@@ -155,7 +155,7 @@ export const changeState = async (req, res) => {
 
       await batch.save()
 
-      createTransaccion(batchId, newACtion);
+      createTransaction(batchId, newACtion);
       console.log("Entre")
       return res
           .status(200)
