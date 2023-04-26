@@ -14,7 +14,7 @@ export const batchExist = async (req, res) => {
   try {
     const batch = await Batch.find({ userId });
 
-    if (batch.length == 0) {
+    if (batch.length === 0) {
       return res
         .status(404)
         .json({ message: "No existe una carpeta asignada para ese usuario" });
@@ -239,14 +239,19 @@ async function audit(){
     console.log(name)
     console.log()
 
+    if(transactionN.length!==0){
+      fs.writeFile("C:\\PruebaRuta\\"+name.replaceAll(":","-"), data, err=>{
+        if(err){
+          console.log("Error writing file" ,err)
+        } else {
+          console.log('JSON data is written to the file successfully')
+        }
+      })
 
-    fs.writeFile("C:\\PruebaRuta\\"+name.replaceAll(":","-"), data, err=>{
-      if(err){
-        console.log("Error writing file" ,err)
-      } else {
-        console.log('JSON data is written to the file successfully')
-      }
-    })
+    }else {
+      console.log("no hay transacciones para auditar")
+    }
+
 
 
   } catch (error) {
