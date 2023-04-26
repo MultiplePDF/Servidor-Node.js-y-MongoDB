@@ -17,17 +17,17 @@ app.set("json spaces", 4);
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 
 // Welcome Routes
 app.get("/", (req, res) => {
-  res.json({
-    message: "Server-DataBase",
-    name: app.get("pkg").name,
-    version: app.get("pkg").version,
-    description: app.get("pkg").description,
-    author: app.get("pkg").author,
-  });
+    res.json({
+        message: "Server-DataBase",
+        name: app.get("pkg").name,
+        version: app.get("pkg").version,
+        description: app.get("pkg").description,
+        author: app.get("pkg").author,
+    });
 });
 
 // Routes

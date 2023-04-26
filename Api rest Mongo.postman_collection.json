@@ -1,18 +1,19 @@
 {
 	"info": {
-		"_postman_id": "4798d7bd-8f7e-4b63-b8e0-df1efdac9afa",
+		"_postman_id": "5d58c4fc-8313-4932-a9a4-7f09f9aaf896",
 		"name": "Api rest Mongo Copy",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26378506"
 	},
 	"item": [
 		{
-			"name": "/lote/create",
+			"name": "/batch/createBatch",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idUsuario\":2,\r\n    \"numeroArchivos\":1,\r\n    \"rutaLote\": \"C:\\\\Users\\\\CAMILO\\\\Documents\\\\GitHub\",\r\n    \"archivos\":[{\r\n        \"nombreArchivo\":\"arepa\",\r\n        \"tamanno\":15.21,\r\n        \"rutaArchivo\":\"ruta\"\r\n    }],\r\n    \"vigencia\":\"2023-03-15\"\r\n}",
+					"raw": "{\r\n    \"userId\":3,\r\n    \"numberFiles\":1,\r\n    \"batchPath\": \"C:\\\\Users\\\\Henry\\\\Documents\\\\GitHub\",\r\n    \"files\":[{\r\n        \"fileName\":\"sopa\",\r\n        \"size\":42.1,\r\n        \"filePath\":\"ruta en rust\"\r\n    }],\r\n    \"validity\":\"2023-03-30\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,28 +21,28 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/lote/create",
+					"raw": "http://localhost:3000/batch/createBatch",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"lote",
-						"create"
+						"batch",
+						"createBatch"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/lote/uploadLotes",
+			"name": "/batch/callBatches",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idUsuario\":2\r\n}",
+					"raw": "{\r\n    \"userId\":2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,28 +50,28 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/lote/uploadLotes",
+					"raw": "http://localhost:3000/batch/callBatches",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"lote",
-						"uploadLotes"
+						"batch",
+						"callBatches"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/lote/uploadFiles",
+			"name": "/batch/callFiles",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idLote\":\"64348d2f1bcb58268c06e466\"\r\n}",
+					"raw": "{\r\n    \"batchID\":\"6445efc502de158b289c51fe\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,44 +79,31 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/lote/uploadFiles",
+					"raw": "http://localhost:3000/batch/callFiles",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"lote",
-						"uploadFiles"
+						"batch",
+						"callFiles"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "/lote/downloadLote",
+			"name": "/batch/downloadBatch",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "/lote/downloadFile",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "/lote/changeEstado",
-			"request": {
-				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idLote\":\"64348d571bcb58268c06e468\",\r\n    \"estado\":true\r\n}",
+					"raw": "{\r\n    \"batchId\":\"6447eb0fe566f9476cc20213\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -123,15 +111,96 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/lote/changeEstado",
+					"raw": "http://localhost:3000/batch/downloadBatch",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"lote",
-						"changeEstado"
+						"batch",
+						"downloadBatch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/batch/downloadFile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"batchId\":\"6447eb0fe566f9476cc20213\",\r\n    \"fileIdx\":0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/batch/downloadFile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"batch",
+						"downloadFile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/batch/changeState",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"batchId\": \"6447eb0fe566f9476cc20213\",\r\n    \"status\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/batch/changeState",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"batch",
+						"changeState"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/batch/test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/batch/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"batch",
+						"test"
 					]
 				}
 			},
