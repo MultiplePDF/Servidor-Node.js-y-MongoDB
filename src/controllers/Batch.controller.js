@@ -205,7 +205,9 @@ async function audit(){
     console.log()
 
     if(transactionN.length!==0){
-      fs.writeFile("C:\\PruebaRuta\\"+name.replaceAll(":","-"), data, err=>{
+      //Ruta en ubuntu ejemplo: \\home\\x\\
+      //ruta en windows ejemplo: C:\\x\\"
+      fs.writeFile("\\home\\bd-admin\\servidor\\"+name.replaceAll(":","-"), data, err=>{
         if(err){
           console.log("Error writing file" ,err)
         } else {
