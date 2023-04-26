@@ -1,6 +1,6 @@
 # Prueba proyecto db
 
-![](https://img.shields.io/badge/Project%20Version-0.0.1-brightgreen) ![](https://img.shields.io/badge/node-%3E=%2016.0.0-brightgreen)
+![](https://img.shields.io/badge/Project%20Version-2.0.5-brightgreen) ![](https://img.shields.io/badge/node-%3E=%2016.0.0-brightgreen)
 
 ---
 
