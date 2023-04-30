@@ -210,7 +210,7 @@ async function audit() {
         if (transactionN.length !== 0) {
             //Ruta en ubuntu ejemplo: \\home\\x\\
             //ruta en windows ejemplo: C:\\x\\"
-            fs.writeFile("/home/bd-admin/servidor/" + name.replaceAll(":", "-"), data, err => {
+            fs.writeFile("/opt/services/servidor/" + name.replaceAll(":", "-"), data, err => {
                 if (err) {
                     console.log("Error writing file", err)
                 } else {
