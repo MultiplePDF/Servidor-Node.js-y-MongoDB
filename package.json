@@ -20,12 +20,10 @@
   },
   "homepage": "https://github.com/MultiplePDF",
   "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.3",
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.5",
     "@babel/node": "^7.20.7",
-    "@babel/preset-env": "^7.20.2",
-    "babel-cli": "^6.26.0",
-    "babel-node": "^0.0.1-security",
+    "@babel/preset-env": "^7.21.5",
     "jest": "^26.4.2",
     "nodemon": "^2.0.21",
     "supertest": "^4.0.2"
